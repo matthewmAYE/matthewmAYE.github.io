@@ -940,6 +940,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-bottom: 70px;
   }
 
   .bouquet-overlay.active .bouquet-card {
@@ -1020,14 +1021,11 @@
     animation: fadeUp 0.8s ease 2.6s forwards;
   }
 
-  /* ---- Bouquet scene ---- */
-  .bouquet-scene {
-    position: relative;
-    width: 460px;
-    height: 560px;
-    max-width: 92vw;
-    max-height: 70vh;
-  }
+.bouquet-scene {
+  position: relative;
+  width: 460px;
+  height: 560px;
+}
 
   /* ---- Wrapping paper ---- */
   .bouquet-wrap {
@@ -1142,19 +1140,98 @@
     100% { opacity: 0; transform: translate(var(--tx, 50px), var(--ty, -80px)) rotate(var(--tr, 360deg)) scale(1); }
   }
 
-  /* ============ RESPONSIVE ============ */
-  @media (max-width: 600px) {
+ @media (max-width: 600px) {
     .envelope { padding: 2rem 1.5rem; }
     .polaroid-img { width: 150px; height: 150px; }
     .reasons-grid { grid-template-columns: 1fr; }
-    .bouquet-scene { width: 340px; height: 450px; }
-    .bouquet-wrap { width: 260px; height: 220px; }
+
+    /* Bouquet — scale the whole composition proportionally */
+    .bouquet-card {
+      width: 96vw;
+      height: 92vh;
+      border-radius: 18px;
+      padding: 0;
+    }
+    .bouquet-close {
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      font-size: 0.95rem;
+    }
+    .bouquet-scene {
+      /* Keep authored size, scale down to fit viewport */
+      width: 460px;
+      height: 560px;
+      max-width: none;
+      max-height: none;
+      transform: scale(var(--bouquet-scale, 0.65));
+      transform-origin: top center;
+    }
+    .bouquet-title {
+      bottom: 22px;
+      font-size: 1.1rem;
+    }
+    .bouquet-subtitle {
+      bottom: 8px;
+      font-size: 0.65rem;
+    }
+
+    /* Vinyl player */
+    .vinyl-player {
+      width: min(300px, 78vw);
+      height: min(300px, 78vw);
+    }
+    .play-btn {
+      width: 48px;
+      height: 48px;
+      bottom: -24px;
+    }
+    .song-section { padding: 4rem 1.5rem; }
   }
+
+  /* Small phones */
+  @media (max-width: 400px) {
+    .bouquet-scene {
+      --bouquet-scale: 0.52;
+    }
+    .bouquet-card {
+      height: 88vh;
+    }
+    .bouquet-title { bottom: 16px; font-size: 1rem; }
+    .bouquet-subtitle { bottom: 4px; font-size: 0.6rem; }
+    .hero-title { font-size: 2.8rem; }
+    .section-title { font-size: 1.8rem; }
+    .vinyl-player {
+      width: 260px;
+      height: 260px;
+    }
+  }
+
+  /* Medium phones */
+  @media (min-width: 401px) and (max-width: 600px) {
+    .bouquet-scene {
+      --bouquet-scale: 0.68;
+    }
+  }
+
+  /* Landscape phones */
+  @media (max-height: 500px) and (max-width: 900px) {
+    .bouquet-scene {
+      --bouquet-scale: 0.5;
+    }
+    .bouquet-card {
+      height: 96vh;
+    }
+    .bouquet-title { bottom: 8px; font-size: 0.95rem; }
+    .bouquet-subtitle { display: none; }
+  }
+  
 </style>
 </head>
 <body>
 
-<!-- Floating hearts background -->
+
 <div class="floating-hearts" id="floatingHearts"></div>
 
 <!-- ====== HERO ====== -->
@@ -1236,7 +1313,7 @@
       <div class="polaroid-caption">that cheung chau dayyyy</div>
     </div>
     
-    <div class="polaroid" style="--rotate: -90deg;">
+    <div class="polaroid" style="--rotate: -1deg;">
    <img class="polaroid-img" src="sanya.JPG" style="transform: rotate(-90deg);">
       <div class="polaroid-caption">our sanya surprise</div>
     </div>
@@ -1476,7 +1553,18 @@ const bouquetClose = document.getElementById('bouquetClose');
 const bouquetBackdrop = document.getElementById('bouquetBackdrop');
 const flowerPolaroid = document.getElementById('flowerPolaroid');
 
-// SVG flower HEAD generators — no stems, just blooms
+function updateBouquetScale() {
+  if (window.innerWidth <= 600) {
+    const availW = window.innerWidth * 0.94;
+    const availH = window.innerHeight * 0.78;
+    const scaleW = availW / 460;
+    const scaleH = availH / 560;
+    const scale = Math.min(scaleW, scaleH, 1);
+    document.querySelector('.bouquet-scene')
+      .style.setProperty('--bouquet-scale', scale.toFixed(3));
+  }
+}
+window.addEventListener('resize', updateBouquetScale);
 
 function svgRose(size, color, innerColor) {
   const cx = size/2, r = size*0.42;
@@ -1789,6 +1877,7 @@ function buildBouquet() {
 function openBouquet(e) {
   e.stopPropagation();
   buildBouquet();
+  updateBouquetScale();
   bouquetOverlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 }

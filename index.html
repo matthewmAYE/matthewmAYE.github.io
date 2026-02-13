@@ -37,7 +37,7 @@
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ctext y='15' font-size='14'%3E♡%3C/text%3E%3C/svg%3E"), auto;
   }
 
-
+  /* ============ HERO SECTION ============ */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -188,6 +188,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* ============ FLOATING HEARTS ============ */
   .floating-hearts {
     position: fixed;
     inset: 0;
@@ -211,6 +212,7 @@
     100% { opacity: 0; transform: translateY(-110vh) rotate(360deg) scale(1); }
   }
 
+  /* ============ LETTER SECTION ============ */
   .letter-section {
     min-height: 100vh;
     display: flex;
@@ -498,6 +500,287 @@
     text-align: center;
   }
 
+  /* ============ SONG SECTION ============ */
+  .song-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 40% 60%, rgba(90,62,62,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 40%, rgba(212,165,116,0.12) 0%, transparent 50%),
+      var(--warm-white);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* --- Vinyl Player --- */
+  .vinyl-player {
+    position: relative;
+    width: min(380px, 82vw);
+    height: min(380px, 82vw);
+    margin: 2rem 0 2.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+  }
+
+  .vinyl-player.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Player base / cabinet */
+  .player-base {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #3a2a2a, #2a1c1c 40%, #1e1414);
+    box-shadow:
+      0 15px 50px rgba(0,0,0,0.35),
+      0 5px 20px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      inset 0 -1px 0 rgba(0,0,0,0.3);
+  }
+
+  /* Subtle wood grain */
+  .player-base::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background:
+      repeating-linear-gradient(92deg,
+        transparent, transparent 18px,
+        rgba(255,255,255,0.012) 18px, rgba(255,255,255,0.012) 20px);
+    pointer-events: none;
+  }
+
+  /* Inner felt area */
+  .player-felt {
+    position: absolute;
+    top: 20px; left: 20px; right: 20px; bottom: 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #1a1212, #150e0e);
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+  }
+
+  /* Vinyl record */
+  .vinyl-record {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 78%;
+    height: 78%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle,
+        #1a1a1a 18%,
+        transparent 18.5%,
+        transparent 19%,
+        #1a1a1a 19.5%),
+      radial-gradient(circle,
+        transparent 22%,
+        #111 22.5%,
+        #111 23%,
+        transparent 23.5%),
+      radial-gradient(circle,
+        transparent 38%,
+        rgba(40,40,40,0.5) 38.5%,
+        rgba(40,40,40,0.5) 39%,
+        transparent 39.5%),
+      radial-gradient(circle,
+        transparent 52%,
+        rgba(40,40,40,0.4) 52.5%,
+        rgba(40,40,40,0.4) 53%,
+        transparent 53.5%),
+      radial-gradient(circle,
+        transparent 66%,
+        rgba(40,40,40,0.3) 66.5%,
+        rgba(40,40,40,0.3) 67%,
+        transparent 67.5%),
+      radial-gradient(circle,
+        transparent 80%,
+        rgba(40,40,40,0.3) 80.5%,
+        rgba(40,40,40,0.3) 81%,
+        transparent 81.5%),
+      conic-gradient(from 0deg,
+        #1a1a1a, #222, #1a1a1a, #252525, #1a1a1a, #222, #1a1a1a, #252525, #1a1a1a);
+    box-shadow:
+      0 0 0 3px #111,
+      0 0 20px rgba(0,0,0,0.5),
+      inset 0 0 30px rgba(0,0,0,0.3);
+    animation: none;
+    transition: none;
+  }
+
+  .vinyl-record.spinning {
+    animation: spin 2.5s linear infinite;
+  }
+
+  .vinyl-record.paused {
+    animation-play-state: paused;
+  }
+
+  @keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Label */
+  .vinyl-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32%;
+    height: 32%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background:
+      radial-gradient(circle,
+        #5a3e3e 8%, transparent 9%),
+      radial-gradient(circle at 45% 42%,
+        rgba(255,255,255,0.1) 0%, transparent 30%),
+      linear-gradient(135deg, var(--deep-rose), #a84040 40%, var(--deep-rose) 70%, #8a3030);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .vinyl-label-text {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-top: 2px;
+  }
+
+  .vinyl-label-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.9);
+    margin-top: 1px;
+  }
+
+  /* Tonearm */
+  .tonearm {
+    position: absolute;
+    top: 12%;
+    right: 12%;
+    width: 40%;
+    height: 50%;
+    transform-origin: 78% 8%;
+    transform: rotate(-22deg);
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .tonearm.playing {
+    transform: rotate(0deg);
+  }
+
+  .tonearm svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  }
+
+  /* Play button */
+  .play-btn {
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--rose);
+    background: linear-gradient(135deg, rgba(254,246,240,0.95), rgba(244,194,194,0.3));
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(201,114,114,0.2);
+    z-index: 10;
+  }
+
+  .play-btn:hover {
+    transform: translateX(-50%) scale(1.1);
+    border-color: var(--deep-rose);
+    box-shadow: 0 6px 28px rgba(201,114,114,0.35);
+  }
+
+  .play-btn:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+
+  .play-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--deep-rose);
+    transition: all 0.2s ease;
+  }
+
+  /* Play icon shift for visual centering */
+  .play-btn .icon-play {
+    margin-left: 3px;
+  }
+
+  .song-info {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease 0.3s;
+  }
+
+  .song-info.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .song-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .song-artist {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+  }
+
+  .song-dedication {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--deep-rose);
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.8s ease 0.6s;
+  }
+
+  .song-dedication.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* ============ FINAL SECTION ============ */
   .final-section {
     min-height: 60vh;
@@ -571,6 +854,7 @@
     filter: drop-shadow(0 4px 20px rgba(201,114,114,0.35));
   }
 
+  /* ============ PETAL RAIN ============ */
   .petal {
     position: fixed;
     pointer-events: none;
@@ -586,6 +870,7 @@
     100% { opacity: 0; transform: translateY(100vh) rotate(720deg) translateX(80px); }
   }
 
+  /* ============ CLICK HEARTS ============ */
   .click-heart {
     position: fixed;
     pointer-events: none;
@@ -639,8 +924,8 @@
   .bouquet-card {
     position: relative;
     z-index: 2;
-    width: min(600px, 90vw);
-    height: min(700px, 85vh);
+    width: min(650px, 94vw);
+    height: min(780px, 90vh);
     background: linear-gradient(170deg, #fffaf5, #fef0e0 40%, #fce4e4 100%);
     border-radius: 24px;
     box-shadow:
@@ -738,10 +1023,10 @@
   /* ---- Bouquet scene ---- */
   .bouquet-scene {
     position: relative;
-    width: 420px;
-    height: 500px;
-    max-width: 85vw;
-    max-height: 65vh;
+    width: 460px;
+    height: 560px;
+    max-width: 92vw;
+    max-height: 70vh;
   }
 
   /* ---- Wrapping paper ---- */
@@ -750,9 +1035,10 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 180px;
-    height: 200px;
+    width: 320px;
+    height: 260px;
     opacity: 0;
+    z-index: 2;
   }
 
   .bouquet-overlay.active .bouquet-wrap {
@@ -790,7 +1076,7 @@
     100% { opacity: 1; transform: scale(1) rotate(var(--rot, 0deg)) translateY(0); }
   }
 
-  /* Gentle idle sway for bloomed flowers */
+  /* Gentle idle sway for bloomed flowers — keep visible */
   .bouquet-overlay.active .bouquet-flower.bloomed {
     opacity: 1;
     animation: flowerSway 3s ease-in-out infinite alternate;
@@ -856,19 +1142,22 @@
     100% { opacity: 0; transform: translate(var(--tx, 50px), var(--ty, -80px)) rotate(var(--tr, 360deg)) scale(1); }
   }
 
+  /* ============ RESPONSIVE ============ */
   @media (max-width: 600px) {
     .envelope { padding: 2rem 1.5rem; }
     .polaroid-img { width: 150px; height: 150px; }
     .reasons-grid { grid-template-columns: 1fr; }
+    .bouquet-scene { width: 340px; height: 450px; }
+    .bouquet-wrap { width: 260px; height: 220px; }
   }
 </style>
 </head>
 <body>
 
-
+<!-- Floating hearts background -->
 <div class="floating-hearts" id="floatingHearts"></div>
 
-
+<!-- ====== HERO ====== -->
 <section class="hero">
   <div class="hero-content">
     <p class="hero-top-text">My Dear Sayastha</p>
@@ -884,6 +1173,7 @@
   </div>
 </section>
 
+<!-- ====== LOVE LETTER ====== -->
 <section class="letter-section">
   <div class="envelope-container">
     <div class="envelope" id="envelope">
@@ -898,6 +1188,7 @@
   </div>
 </section>
 
+<!-- ====== REASONS I LOVE YOU ====== -->
 <section class="reasons-section">
   <p class="section-label">a few of many</p>
   <h2 class="section-title">Reasons I Love You</h2>
@@ -929,17 +1220,21 @@
   </div>
 </section>
 
-
+<!-- ====== PHOTO MEMORIES ====== -->
 <section class="gallery-section">
-  <h2 class="section-title">Our Gallery</h2>
+  <h2 class="section-title">Our Little Gallery</h2>
   <div class="polaroid-grid" id="polaroidGrid">
     <div class="polaroid" style="--rotate: -3deg;">
-      <div class="polaroid-img">🥰</div>
-      <div class="polaroid-caption">our new years</div>
+      <div class="polaroid-img">
+       <img src="">
+      </div>
+      <div class="polaroid-caption">our first New Year's</div>
     </div>
     <div class="polaroid" style="--rotate: 2deg;">
-      <div class="polaroid-img">🌅</div>
-      <div class="polaroid-caption">that cheung chau day</div>
+      <div class="polaroid-img">
+        <img>
+      </div>
+      <div class="polaroid-caption">that cheung chau dayyyy</div>
     </div>
     <div class="polaroid" style="--rotate: -1deg;">
       <div class="polaroid-img">🎂</div>
@@ -952,7 +1247,8 @@
   </div>
 </section>
 
-  <div class="bouquet-overlay" id="bouquetOverlay">
+<!-- ====== BOUQUET MODAL ====== -->
+<div class="bouquet-overlay" id="bouquetOverlay">
   <div class="bouquet-backdrop" id="bouquetBackdrop"></div>
   <div class="bouquet-card">
     <button class="bouquet-close" id="bouquetClose">✕</button>
@@ -961,6 +1257,79 @@
     <div class="bouquet-subtitle">because you deserve flowers every day</div>
   </div>
 </div>
+
+<!-- ====== SONG DEDICATION ====== -->
+<section class="song-section">
+  <p class="section-label">our song</p>
+  <h2 class="section-title">A Song For You</h2>
+
+  <div class="vinyl-player" id="vinylPlayer">
+    <div class="player-base"></div>
+    <div class="player-felt"></div>
+
+    <div class="vinyl-record" id="vinylRecord">
+      <div class="vinyl-label">
+        <span class="vinyl-label-text">♡ for you my love ♡</span>
+        <span class="vinyl-label-title">M + S</span>
+      </div>
+    </div>
+
+    <!-- Tonearm -->
+    <div class="tonearm" id="tonearm">
+      <svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Pivot base -->
+        <circle cx="125" cy="16" r="14" fill="#888" opacity="0.6"/>
+        <circle cx="125" cy="16" r="9" fill="#aaa" opacity="0.7"/>
+        <circle cx="125" cy="16" r="5" fill="#ccc"/>
+        <!-- Arm -->
+        <rect x="30" y="12" width="100" height="7" rx="3" fill="linear-gradient(#bbb,#999)"
+          transform="rotate(2 80 16)"/>
+        <rect x="30" y="12" width="100" height="7" rx="3" fill="#aaa" opacity="0.9"
+          transform="rotate(2 80 16)"/>
+        <!-- Highlight on arm -->
+        <rect x="35" y="13" width="90" height="2.5" rx="1" fill="#ccc" opacity="0.5"
+          transform="rotate(2 80 16)"/>
+        <!-- Head shell -->
+        <rect x="8" y="10" width="28" height="10" rx="2" fill="#999"
+          transform="rotate(2 22 16)"/>
+        <rect x="8" y="11" width="28" height="4" rx="1" fill="#bbb" opacity="0.4"
+          transform="rotate(2 22 16)"/>
+        <!-- Cartridge -->
+        <rect x="10" y="20" width="8" height="5" rx="1" fill="#666"
+          transform="rotate(2 14 22)"/>
+        <!-- Stylus -->
+        <line x1="14" y1="25" x2="14" y2="30" stroke="#555" stroke-width="1"
+          transform="rotate(2 14 28)"/>
+        <!-- Counterweight -->
+        <circle cx="140" cy="15" r="7" fill="#888"/>
+        <circle cx="140" cy="15" r="5" fill="#999"/>
+        <circle cx="140" cy="14" r="2.5" fill="#bbb" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <!-- Play / Pause button -->
+    <button class="play-btn" id="playBtn" aria-label="Play song">
+      <svg class="icon-play" id="playIcon" viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+      <svg class="icon-pause" id="pauseIcon" viewBox="0 0 24 24" style="display:none;">
+        <rect x="5" y="3" width="5" height="18" rx="1"/>
+        <rect x="14" y="3" width="5" height="18" rx="1"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Audio element — update src to your mp3 filename -->
+  <audio id="songAudio" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="song-info" id="songInfo">
+    <div class="song-title">Can't Take My Eyes Off You</div>
+    <div class="song-artist">Frankie Valli</div>
+  </div>
+  <div class="song-dedication" id="songDedication">
+    "You make me feel this way everytime I see you"
+  </div>
+</section>
 
 <!-- ====== FINAL ====== -->
 <section class="final-section">
@@ -998,11 +1367,13 @@ function createFloatingHeart() {
   setTimeout(() => heart.remove(), (duration + delay) * 1000);
 }
 
-
+// Create hearts periodically
 setInterval(createFloatingHeart, 1800);
 for (let i = 0; i < 6; i++) createFloatingHeart();
 
+// ============ TYPEWRITER EFFECT ============
 const letterText = "Every day with you feels like the most beautiful gift. Everyday I wake up with slivers of you from my dreams trapped in my eyes, like they're holding onto the last glimpses of a heavenly vision before I fully wake up. I don't know how you do it, but you make everything — every laugh, every quiet moment, every little adventure — feel like magic. Thank you for being you, for choosing me, and for making my world so much more wonderful just by being in it! I am constantly reminded of how lucky I am by your precious beauty and every laugh we share drowns out the sounds of everything else. Don't forget I'll never leave your side and I am always here for you i promise nothing can ever keep me from loving you. I can't wait for you to be back, I'm gonna hold u sooo tight my love. I LOVE YOU FOREVERRRR!! Happy valentine's baby <3";
+
 let letterIndex = 0;
 let letterStarted = false;
 
@@ -1020,9 +1391,12 @@ function typeLetter() {
     document.getElementById('letterClosing').classList.add('visible');
   }
 }
+
+// ============ SCROLL ANIMATIONS ============
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
+      // Reason cards
       if (entry.target.classList.contains('reason-card')) {
         const cards = [...document.querySelectorAll('.reason-card')];
         const idx = cards.indexOf(entry.target);
@@ -1039,6 +1413,7 @@ const observer = new IntersectionObserver((entries) => {
         letterStarted = true;
         setTimeout(typeLetter, 600);
       }
+      // Final section
       if (entry.target.id === 'finalText') {
         entry.target.classList.add('visible');
         document.getElementById('finalSub').classList.add('visible');
@@ -1053,6 +1428,7 @@ document.querySelectorAll('.polaroid').forEach(el => observer.observe(el));
 observer.observe(document.getElementById('envelope'));
 observer.observe(document.getElementById('finalText'));
 
+// ============ CARD GLOW FOLLOW ============
 document.querySelectorAll('.reason-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
@@ -1061,6 +1437,7 @@ document.querySelectorAll('.reason-card').forEach(card => {
   });
 });
 
+// ============ CLICK HEARTS ============
 document.addEventListener('click', e => {
   const hearts = ['♡', '❤', '💕', '💗', '✿', '♥'];
   const heart = document.createElement('div');
@@ -1072,6 +1449,7 @@ document.addEventListener('click', e => {
   setTimeout(() => heart.remove(), 800);
 });
 
+// ============ PETAL RAIN (occasional) ============
 function createPetal() {
   const petal = document.createElement('div');
   petal.classList.add('petal');
@@ -1092,178 +1470,303 @@ function createPetal() {
   setTimeout(() => petal.remove(), 9000);
 }
 
+// ============ BOUQUET MODAL ============
 const bouquetOverlay = document.getElementById('bouquetOverlay');
 const bouquetScene = document.getElementById('bouquetScene');
 const bouquetClose = document.getElementById('bouquetClose');
 const bouquetBackdrop = document.getElementById('bouquetBackdrop');
 const flowerPolaroid = document.getElementById('flowerPolaroid');
 
+// SVG flower HEAD generators — no stems, just blooms
+
 function svgRose(size, color, innerColor) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="50" cy="50" rx="38" ry="36" fill="${color}" opacity="0.5"/>
-    <ellipse cx="50" cy="42" rx="30" ry="28" fill="${color}" opacity="0.7"/>
-    <path d="M50 20 C30 20, 18 35, 22 50 C26 65, 40 68, 50 60 C60 68, 74 65, 78 50 C82 35, 70 20, 50 20Z" fill="${color}"/>
-    <path d="M50 28 C38 28, 28 38, 32 48 C36 58, 44 58, 50 52 C56 58, 64 58, 68 48 C72 38, 62 28, 50 28Z" fill="${innerColor}"/>
-    <path d="M50 35 C42 35, 36 42, 40 48 C44 54, 50 50, 50 50 C50 50, 56 54, 60 48 C64 42, 58 35, 50 35Z" fill="${color}" opacity="0.9"/>
-    <circle cx="50" cy="44" r="6" fill="${innerColor}" opacity="0.8"/>
-    <circle cx="50" cy="44" r="3" fill="${color}" opacity="0.6"/>
+  const cx = size/2, r = size*0.42;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+    <path d="M${cx-r*0.4} ${size*0.72} C${cx-r*0.7} ${size*0.8}, ${cx-r*0.2} ${size*0.86}, ${cx} ${size*0.8}" fill="#3d6b2e" opacity="0.55"/>
+    <path d="M${cx+r*0.4} ${size*0.72} C${cx+r*0.7} ${size*0.8}, ${cx+r*0.2} ${size*0.86}, ${cx} ${size*0.8}" fill="#4a7a3a" opacity="0.45"/>
+    <ellipse cx="${cx}" cy="${cx}" rx="${r}" ry="${r*0.95}" fill="${color}" opacity="0.4"/>
+    <path d="M${cx} ${size*0.12} C${cx-r*0.9} ${size*0.12}, ${cx-r} ${size*0.38}, ${cx-r*0.7} ${size*0.55}
+      C${cx-r*0.4} ${size*0.68}, ${cx} ${size*0.7}, ${cx} ${size*0.62}
+      C${cx} ${size*0.7}, ${cx+r*0.4} ${size*0.68}, ${cx+r*0.7} ${size*0.55}
+      C${cx+r} ${size*0.38}, ${cx+r*0.9} ${size*0.12}, ${cx} ${size*0.12}Z" fill="${color}"/>
+    <path d="M${cx} ${size*0.22} C${cx-r*0.55} ${size*0.24}, ${cx-r*0.6} ${size*0.42}, ${cx-r*0.35} ${size*0.52}
+      C${cx-r*0.1} ${size*0.6}, ${cx} ${size*0.55}, ${cx} ${size*0.55}
+      C${cx} ${size*0.55}, ${cx+r*0.1} ${size*0.6}, ${cx+r*0.35} ${size*0.52}
+      C${cx+r*0.6} ${size*0.42}, ${cx+r*0.55} ${size*0.24}, ${cx} ${size*0.22}Z" fill="${innerColor}"/>
+    <path d="M${cx} ${size*0.32} C${cx-r*0.3} ${size*0.32}, ${cx-r*0.35} ${size*0.44}, ${cx-r*0.12} ${size*0.47}
+      C${cx+r*0.08} ${size*0.5}, ${cx+r*0.2} ${size*0.46}, ${cx+r*0.18} ${size*0.4}
+      C${cx+r*0.15} ${size*0.36}, ${cx+r*0.05} ${size*0.34}, ${cx} ${size*0.36}Z" fill="${color}" opacity="0.75"/>
+    <ellipse cx="${cx}" cy="${size*0.4}" rx="${r*0.13}" ry="${r*0.1}" fill="${innerColor}" opacity="0.65"/>
+    <ellipse cx="${cx-r*0.18}" cy="${size*0.3}" rx="${r*0.1}" ry="${r*0.06}" fill="white" opacity="0.12" transform="rotate(-20 ${cx-r*0.18} ${size*0.3})"/>
   </svg>`;
 }
 
 function svgTulip(size, color, darkColor) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
-    <line x1="40" y1="65" x2="40" y2="115" stroke="#4a7a3a" stroke-width="3" stroke-linecap="round"/>
-    <path d="M38 85 C30 80, 15 75, 12 82 C9 89, 22 88, 30 86" fill="#5a9a4a" opacity="0.7"/>
-    <path d="M40 15 C25 15, 12 30, 15 50 C18 65, 30 68, 40 65 C50 68, 62 65, 65 50 C68 30, 55 15, 40 15Z" fill="${color}"/>
-    <path d="M40 15 C35 15, 22 28, 25 48 C27 58, 34 62, 40 60Z" fill="${darkColor}" opacity="0.5"/>
-    <path d="M40 15 C45 15, 58 28, 55 48 C53 58, 46 62, 40 60Z" fill="white" opacity="0.12"/>
-    <ellipse cx="40" cy="18" rx="8" ry="4" fill="${darkColor}" opacity="0.3"/>
+  const cx = size/2;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+    <path d="M${cx} ${size*0.08} C${cx-size*0.32} ${size*0.08}, ${cx-size*0.42} ${size*0.35},
+      ${cx-size*0.32} ${size*0.6} C${cx-size*0.22} ${size*0.78}, ${cx-size*0.05} ${size*0.88}, ${cx} ${size*0.82}Z" fill="${color}"/>
+    <path d="M${cx} ${size*0.08} C${cx+size*0.32} ${size*0.08}, ${cx+size*0.42} ${size*0.35},
+      ${cx+size*0.32} ${size*0.6} C${cx+size*0.22} ${size*0.78}, ${cx+size*0.05} ${size*0.88}, ${cx} ${size*0.82}Z" fill="${color}"/>
+    <path d="M${cx} ${size*0.15} C${cx-size*0.2} ${size*0.18}, ${cx-size*0.25} ${size*0.4},
+      ${cx-size*0.15} ${size*0.58} C${cx-size*0.08} ${size*0.68}, ${cx} ${size*0.72}, ${cx} ${size*0.68}Z" fill="${darkColor}" opacity="0.3"/>
+    <path d="M${cx+size*0.04} ${size*0.18} C${cx+size*0.16} ${size*0.22}, ${cx+size*0.2} ${size*0.42},
+      ${cx+size*0.12} ${size*0.52}Z" fill="white" opacity="0.1"/>
+    <ellipse cx="${cx}" cy="${size*0.1}" rx="${size*0.13}" ry="${size*0.04}" fill="${darkColor}" opacity="0.25"/>
   </svg>`;
 }
 
 function svgBlossom(size, color, centerColor) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(50,50)">
-      ${[0, 72, 144, 216, 288].map(angle => `
-        <ellipse cx="0" cy="-20" rx="14" ry="22" fill="${color}" transform="rotate(${angle})" opacity="0.85"/>
-      `).join('')}
-      ${[36, 108, 180, 252, 324].map(angle => `
-        <ellipse cx="0" cy="-16" rx="10" ry="18" fill="${color}" transform="rotate(${angle})" opacity="0.5"/>
-      `).join('')}
-      <circle cx="0" cy="0" r="8" fill="${centerColor}"/>
-      <circle cx="-2" cy="-2" r="2" fill="white" opacity="0.5"/>
-      <circle cx="2" cy="1" r="1.5" fill="white" opacity="0.3"/>
+  const cx = size/2, s = size/100, pr = size*0.22, pd = size*0.2;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(${cx},${cx})">
+      ${[0,72,144,216,288].map(a=>`<ellipse cx="0" cy="${-pd}" rx="${pr*0.65}" ry="${pr}" fill="${color}" transform="rotate(${a})" opacity="0.85"/>`).join('')}
+      ${[36,108,180,252,324].map(a=>`<ellipse cx="0" cy="${-pd*0.8}" rx="${pr*0.45}" ry="${pr*0.8}" fill="${color}" transform="rotate(${a})" opacity="0.45"/>`).join('')}
+      <circle cx="0" cy="0" r="${size*0.09}" fill="${centerColor}"/>
+      <circle cx="${-2*s}" cy="${-2*s}" r="${2*s}" fill="white" opacity="0.4"/>
     </g>
   </svg>`;
 }
 
 function svgSmallBud(size, color) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg">
-    <line x1="25" y1="35" x2="25" y2="65" stroke="#5a9a4a" stroke-width="2" stroke-linecap="round"/>
-    <ellipse cx="25" cy="22" rx="12" ry="18" fill="${color}" opacity="0.8"/>
-    <ellipse cx="25" cy="18" rx="8" ry="12" fill="${color}"/>
-    <ellipse cx="25" cy="15" rx="4" ry="6" fill="white" opacity="0.15"/>
+  const cx = size/2, s = size/50;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+    <path d="M${cx-3*s} ${size*0.65} C${cx-6*s} ${size*0.7}, ${cx-2*s} ${size*0.78}, ${cx} ${size*0.73}" fill="#3d6b2e" opacity="0.5"/>
+    <path d="M${cx+3*s} ${size*0.65} C${cx+6*s} ${size*0.7}, ${cx+2*s} ${size*0.78}, ${cx} ${size*0.73}" fill="#4a7a3a" opacity="0.4"/>
+    <ellipse cx="${cx}" cy="${size*0.38}" rx="${size*0.26}" ry="${size*0.4}" fill="${color}" opacity="0.85"/>
+    <ellipse cx="${cx}" cy="${size*0.3}" rx="${size*0.17}" ry="${size*0.28}" fill="${color}"/>
+    <ellipse cx="${cx-1.5*s}" cy="${size*0.24}" rx="${size*0.06}" ry="${size*0.1}" fill="white" opacity="0.12"/>
   </svg>`;
 }
 
+// === GATHER POINT: where all stems converge (center of wrap opening) ===
+const GATHER_X = 230;
+const GATHER_Y = 370;
+
+// Flower data — x,y is the BLOOM HEAD top-left position
 const bouquetFlowers = [
-  { type:'rose', x:170, y:80, size:80, color:'#c0392b', inner:'#e74c3c', rot:-5, delay:0.6 },
-  { type:'rose', x:230, y:65, size:90, color:'#a93226', inner:'#d63031', rot:3, delay:0.7 },
-  { type:'rose', x:190, y:130, size:75, color:'#e74c3c', inner:'#f1948a', rot:-8, delay:0.9 },
-
-  { type:'rose', x:110, y:110, size:65, color:'#cb4335', inner:'#ec7063', rot:-15, delay:1.0 },
-  { type:'rose', x:280, y:100, size:70, color:'#b03a2e', inner:'#d98880', rot:12, delay:1.05 },
-  { type:'rose', x:140, y:50, size:55, color:'#d4453a', inner:'#f1948a', rot:-10, delay:1.1 },
-  { type:'rose', x:270, y:45, size:58, color:'#c0392b', inner:'#e74c3c', rot:8, delay:1.15 },
-  
- 
-
-  { type:'tulip', x:80, y:50, size:65, color:'#e84393', dark:'#c2185b', rot:-20, delay:1.2 },
-  { type:'tulip', x:310, y:55, size:60, color:'#fd79a8', dark:'#e84393', rot:18, delay:1.25 },
-  { type:'tulip', x:130, y:20, size:55, color:'#ff6b6b', dark:'#c0392b', rot:-12, delay:1.3 },
-  { type:'tulip', x:260, y:15, size:55, color:'#e84393', dark:'#ad1457', rot:10, delay:1.35 },
-  { type:'tulip', x:200, y:10, size:50, color:'#ff7979', dark:'#c0392b', rot:0, delay:1.4 },
-
-  { type:'blossom', x:90, y:15, size:48, color:'#fce4ec', center:'#f8bbd0', rot:-8, delay:1.45 },
-  { type:'blossom', x:310, y:10, size:45, color:'#f8bbd0', center:'#f48fb1', rot:5, delay:1.5 },
-  { type:'blossom', x:60, y:75, size:42, color:'#fce4ec', center:'#e8a0a0', rot:-22, delay:1.55 },
-  { type:'blossom', x:340, y:80, size:40, color:'#f8bbd0', center:'#f48fb1', rot:20, delay:1.6 },
-  { type:'blossom', x:165, y:-5, size:38, color:'#fce4ec', center:'#f8bbd0', rot:-3, delay:1.65 },
-  { type:'blossom', x:245, y:-10, size:40, color:'#fff0f3', center:'#f4c2c2', rot:6, delay:1.7 },
-
-  { type:'bud', x:55, y:40, size:35, color:'#c0392b', rot:-25, delay:1.3 },
-  { type:'bud', x:345, y:45, size:32, color:'#e84393', rot:22, delay:1.35 },
-  { type:'bud', x:105, y:-10, size:30, color:'#ff6b6b', rot:-15, delay:1.4 },
-  { type:'bud', x:295, y:-15, size:28, color:'#fd79a8', rot:12, delay:1.45 },
-  
-  { type:'rose', x:170, y:80, size:80, color:'#c0392b', inner:'#e74c3c', rot:-5, delay:1.3 },
-  { type:'rose', x:230, y:65, size:90, color:'#a93226', inner:'#d63031', rot:3, delay:0.7 },
-  { type:'rose', x:190, y:130, size:75, color:'#e74c3c', inner:'#f1948a', rot:-8, delay:0.9 },
+  // Center roses
+  { type:'rose', x:195, y:95, size:78, color:'#b71c1c', inner:'#e53935', delay:0.7 },
+  { type:'rose', x:245, y:82, size:82, color:'#c62828', inner:'#ef5350', delay:0.75 },
+  { type:'rose', x:165, y:110, size:72, color:'#d32f2f', inner:'#ef9a9a', delay:0.85 },
+  { type:'rose', x:275, y:100, size:70, color:'#b71c1c', inner:'#e57373', delay:0.9 },
+  // Mid ring
+  { type:'rose', x:130, y:120, size:62, color:'#c62828', inner:'#ef5350', delay:1.0 },
+  { type:'rose', x:310, y:110, size:65, color:'#b71c1c', inner:'#e53935', delay:1.02 },
+  { type:'rose', x:215, y:135, size:58, color:'#d32f2f', inner:'#e57373', delay:1.05 },
+  { type:'rose', x:155, y:70, size:55, color:'#c62828', inner:'#ef9a9a', delay:1.08 },
+  { type:'rose', x:290, y:65, size:58, color:'#b71c1c', inner:'#ef5350', delay:1.1 },
+  // Outer
+  { type:'rose', x:100, y:85, size:48, color:'#d32f2f', inner:'#ef9a9a', delay:1.15 },
+  { type:'rose', x:340, y:80, size:50, color:'#c62828', inner:'#e57373', delay:1.18 },
+  // Tulips
+  { type:'tulip', x:80, y:55, size:50, color:'#e84393', dark:'#c2185b', delay:1.2 },
+  { type:'tulip', x:365, y:50, size:48, color:'#fd79a8', dark:'#e84393', delay:1.22 },
+  { type:'tulip', x:120, y:30, size:46, color:'#ff6b6b', dark:'#c0392b', delay:1.28 },
+  { type:'tulip', x:325, y:25, size:44, color:'#e84393', dark:'#ad1457', delay:1.3 },
+  { type:'tulip', x:220, y:18, size:46, color:'#ff7979', dark:'#c0392b', delay:1.35 },
+  { type:'tulip', x:175, y:25, size:42, color:'#fd79a8', dark:'#c2185b', delay:1.38 },
+  { type:'tulip', x:275, y:20, size:44, color:'#e84393', dark:'#ad1457', delay:1.4 },
+  { type:'tulip', x:60, y:90, size:42, color:'#ff6b6b', dark:'#d32f2f', delay:1.42 },
+  { type:'tulip', x:385, y:85, size:40, color:'#fd79a8', dark:'#e84393', delay:1.44 },
+  // Blossoms
+  { type:'blossom', x:90, y:22, size:42, color:'#fce4ec', center:'#f8bbd0', delay:1.5 },
+  { type:'blossom', x:360, y:18, size:40, color:'#f8bbd0', center:'#f48fb1', delay:1.52 },
+  { type:'blossom', x:50, y:65, size:36, color:'#fce4ec', center:'#e8a0a0', delay:1.55 },
+  { type:'blossom', x:400, y:60, size:34, color:'#f8bbd0', center:'#f48fb1', delay:1.58 },
+  { type:'blossom', x:155, y:8, size:38, color:'#fce4ec', center:'#f8bbd0', delay:1.6 },
+  { type:'blossom', x:295, y:5, size:36, color:'#fff0f3', center:'#f4c2c2', delay:1.62 },
+  { type:'blossom', x:110, y:5, size:34, color:'#fce4ec', center:'#f8bbd0', delay:1.64 },
+  { type:'blossom', x:340, y:2, size:35, color:'#f8bbd0', center:'#f48fb1', delay:1.66 },
+  // Buds
+  { type:'bud', x:42, y:42, size:26, color:'#c0392b', delay:1.35 },
+  { type:'bud', x:410, y:38, size:24, color:'#e84393', delay:1.38 },
+  { type:'bud', x:98, y:-5, size:22, color:'#ff6b6b', delay:1.45 },
+  { type:'bud', x:350, y:-8, size:22, color:'#fd79a8', delay:1.48 },
+  { type:'bud', x:200, y:0, size:22, color:'#d32f2f', delay:1.55 },
+  { type:'bud', x:255, y:-5, size:24, color:'#c0392b', delay:1.58 },
 ];
 
+// Leaves around the wrap opening
 const bouquetLeaves = [
-  { x:100, y:165, w:50, h:25, rot:-40, delay:0.5 },
-  { x:280, y:160, w:50, h:25, rot:35, delay:0.55 },
-  { x:70, y:130, w:45, h:22, rot:-55, delay:0.6 },
-  { x:310, y:125, w:45, h:22, rot:50, delay:0.65 },
-  { x:140, y:185, w:40, h:20, rot:-25, delay:0.7 },
-  { x:250, y:180, w:40, h:20, rot:20, delay:0.75 },
-  { x:55, y:100, w:35, h:18, rot:-65, delay:0.8 },
-  { x:340, y:95, w:35, h:18, rot:60, delay:0.85 },
+  { x:100, y:295, w:55, h:28, rot:-50, delay:0.45 },
+  { x:320, y:290, w:55, h:28, rot:45, delay:0.5 },
+  { x:68,  y:260, w:48, h:24, rot:-65, delay:0.55 },
+  { x:352, y:255, w:48, h:24, rot:60, delay:0.6 },
+  { x:145, y:315, w:45, h:22, rot:-30, delay:0.65 },
+  { x:280, y:312, w:45, h:22, rot:26, delay:0.68 },
+  { x:48,  y:225, w:40, h:20, rot:-75, delay:0.72 },
+  { x:382, y:220, w:40, h:20, rot:70, delay:0.75 },
+  { x:192, y:325, w:42, h:20, rot:-12, delay:0.78 },
+  { x:248, y:322, w:42, h:20, rot:10, delay:0.8 },
 ];
 
+// Sparkles
 const sparklePositions = [
-  { x:120, y:30, delay:2.5 }, { x:280, y:25, delay:2.8 },
-  { x:80, y:90, delay:3.0 }, { x:330, y:70, delay:2.7 },
-  { x:200, y:5, delay:3.2 }, { x:160, y:60, delay:2.9 },
-  { x:250, y:55, delay:3.1 }, { x:100, y:-5, delay:3.3 },
-  { x:300, y:0, delay:2.6 }, { x:195, y:95, delay:3.0 },
+  { x:130, y:55, delay:2.5 }, { x:320, y:50, delay:2.8 },
+  { x:80, y:100, delay:3.0 }, { x:370, y:95, delay:2.7 },
+  { x:220, y:25, delay:3.2 }, { x:170, y:75, delay:2.9 },
+  { x:285, y:70, delay:3.1 }, { x:105, y:20, delay:3.3 },
+  { x:345, y:15, delay:2.6 }, { x:210, y:120, delay:3.0 },
+  { x:55, y:55, delay:3.4 }, { x:395, y:50, delay:2.9 },
 ];
 
 function randomBurstPetals() {
   const petals = [];
-  const colors = ['#f4c2c2','#e74c3c','#f8bbd0','#fce4ec','#fd79a8','#ff6b6b','#d4a574'];
-  for (let i = 0; i < 18; i++) {
-    const angle = (Math.PI * 2 / 18) * i + (Math.random() - 0.5) * 0.5;
-    const dist = 100 + Math.random() * 160;
-    petals.push({
-      tx: Math.cos(angle) * dist,
-      ty: Math.sin(angle) * dist - 40,
-      tr: (Math.random() - 0.5) * 720,
-      size: 8 + Math.random() * 10,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      delay: 0.3 + Math.random() * 0.5,
-    });
+  const colors = ['#f4c2c2','#e74c3c','#f8bbd0','#fce4ec','#fd79a8','#ff6b6b','#d4a574','#c62828'];
+  for (let i = 0; i < 22; i++) {
+    const angle = (Math.PI*2/22)*i + (Math.random()-0.5)*0.5;
+    const dist = 110 + Math.random()*180;
+    petals.push({ tx:Math.cos(angle)*dist, ty:Math.sin(angle)*dist-40,
+      tr:(Math.random()-0.5)*720, size:8+Math.random()*12,
+      color:colors[Math.floor(Math.random()*colors.length)], delay:0.3+Math.random()*0.5 });
   }
   return petals;
+}
+
+// Bezier stem from bloom to gather point
+function stemPath(bx, by, gx, gy) {
+  const dx = bx - gx;
+  const dy = gy - by;
+  // Curve outward slightly then converge
+  const cp1x = bx + dx * 0.08;
+  const cp1y = by + dy * 0.35;
+  const cp2x = gx + dx * 0.25;
+  const cp2y = gy - dy * 0.2;
+  return `M${bx},${by} C${cp1x},${cp1y} ${cp2x},${cp2y} ${gx},${gy}`;
 }
 
 function buildBouquet() {
   bouquetScene.innerHTML = '';
 
+  // --- Burst petals ---
   randomBurstPetals().forEach(p => {
     const el = document.createElement('div');
     el.className = 'burst-petal';
-    el.style.cssText = `
-      left: calc(50% - ${p.size/2}px);
-      top: 45%;
-      width: ${p.size}px; height: ${p.size}px;
-      background: ${p.color};
-      --tx: ${p.tx}px; --ty: ${p.ty}px; --tr: ${p.tr}deg;
-      --delay: ${p.delay}s;
-    `;
+    el.style.cssText = `left:calc(50% - ${p.size/2}px); top:45%;
+      width:${p.size}px; height:${p.size}px; background:${p.color};
+      --tx:${p.tx}px; --ty:${p.ty}px; --tr:${p.tr}deg; --delay:${p.delay}s;`;
     bouquetScene.appendChild(el);
   });
 
+  // --- Layer 1: ALL stems on one shared SVG ---
+  const NS = 'http://www.w3.org/2000/svg';
+  const stemSvg = document.createElementNS(NS, 'svg');
+  stemSvg.setAttribute('viewBox', '0 0 460 560');
+  stemSvg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;z-index:1;';
+
+  const stemColors = ['#3d6b2e','#4a7a3a','#3a6528','#4d8040'];
+
+  bouquetFlowers.forEach((f, i) => {
+    const bloomCX = f.x + f.size/2;
+    const bloomBY = f.y + f.size * 0.85;
+    const col = stemColors[i % stemColors.length];
+    const w = (f.type==='blossom'||f.type==='bud') ? 2 : 2.8;
+
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', stemPath(bloomCX, bloomBY, GATHER_X, GATHER_Y));
+    p.setAttribute('stroke', col);
+    p.setAttribute('stroke-width', w);
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke-linecap', 'round');
+    p.setAttribute('opacity', '0.8');
+    stemSvg.appendChild(p);
+
+    // Stem leaves
+    if (f.type === 'rose' || f.type === 'tulip') {
+      const t = 0.4 + Math.random()*0.15;
+      const mx = bloomCX + (GATHER_X - bloomCX)*t;
+      const my = bloomBY + (GATHER_Y - bloomBY)*t;
+      const side = (f.x < GATHER_X) ? -1 : 1;
+      const ang = side * (30 + Math.random()*20);
+      const leaf = document.createElementNS(NS, 'ellipse');
+      leaf.setAttribute('cx', mx + side*12);
+      leaf.setAttribute('cy', my - 2);
+      leaf.setAttribute('rx', '12');
+      leaf.setAttribute('ry', '4.5');
+      leaf.setAttribute('fill', '#4a7a3a');
+      leaf.setAttribute('opacity', '0.5');
+      leaf.setAttribute('transform', `rotate(${ang} ${mx+side*12} ${my-2})`);
+      stemSvg.appendChild(leaf);
+    }
+  });
+  bouquetScene.appendChild(stemSvg);
+
+  // --- Layer 2: Wrapping paper (z-index 2, covers stem bottoms) ---
   const wrap = document.createElement('div');
   wrap.className = 'bouquet-wrap';
   wrap.innerHTML = `<div class="wrap-body">
-    <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
-      <path d="M30 40 L10 190 C10 196, 16 200, 22 200 L158 200 C164 200, 170 196, 170 190 L150 40Z" fill="#f7d1d1" stroke="#e8a0a0" stroke-width="1"/>
-      <path d="M30 40 L10 190 C10 196, 16 200, 22 200 L90 200 L90 40Z" fill="#f4c2c2" opacity="0.3"/>
-      <path d="M30 40 L150 40" stroke="#d4a574" stroke-width="2" fill="none"/>
-      <path d="M20 55 C50 48, 130 48, 160 55" stroke="#e8c9a0" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <rect x="70" y="28" width="40" height="18" rx="3" fill="#d4a574" opacity="0.5"/>
-      <path d="M90 28 C85 20, 70 18, 75 28 M90 28 C95 20, 110 18, 105 28" stroke="#d4a574" stroke-width="1.5" fill="none"/>
+    <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="wg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#ecc0c0"/>
+          <stop offset="35%" stop-color="#f5d4d4"/>
+          <stop offset="55%" stop-color="#f7d9d9"/>
+          <stop offset="100%" stop-color="#e8b8b8"/>
+        </linearGradient>
+        <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#c9956a"/>
+          <stop offset="50%" stop-color="#d4a574"/>
+          <stop offset="100%" stop-color="#c08050"/>
+        </linearGradient>
+      </defs>
+      <!-- Cone -->
+      <path d="M48 22 L12 222 C10 232, 18 238, 28 238 L292 238 C302 238, 310 232, 308 222 L272 22Z"
+        fill="url(#wg)" stroke="#daa8a8" stroke-width="0.8"/>
+      <path d="M48 22 L12 222 C10 232, 18 238, 28 238 L160 238 L160 22Z" fill="#edbdbd" opacity="0.2"/>
+      <path d="M200 28 L192 228 L248 230 L255 30Z" fill="white" opacity="0.05"/>
+      <!-- Folds -->
+      <path d="M72 40 L38 225" stroke="#daa8a8" stroke-width="0.5" opacity="0.2"/>
+      <path d="M120 26 L102 232" stroke="#daa8a8" stroke-width="0.4" opacity="0.15"/>
+      <path d="M160 22 L158 235" stroke="#daa8a8" stroke-width="0.35" opacity="0.12"/>
+      <path d="M200 24 L210 232" stroke="#daa8a8" stroke-width="0.4" opacity="0.15"/>
+      <path d="M248 40 L278 225" stroke="#daa8a8" stroke-width="0.5" opacity="0.2"/>
+      <!-- Gather line -->
+      <path d="M48 22 L272 22" stroke="#c9956a" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M44 31 C95 24, 225 24, 276 31" stroke="#daa8a8" stroke-width="0.8" fill="none" opacity="0.4"/>
+      <!-- Tissue -->
+      <path d="M35 24 C46 -4, 68 10, 85 -4 C98 -12, 115 8, 132 -6 C148 -14, 162 5, 175 -8
+        C190 5, 205 -12, 220 -2 C235 10, 252 -5, 262 2 C272 10, 282 0, 285 24Z"
+        fill="#fff8f5" opacity="0.7" stroke="#f0d0d0" stroke-width="0.4"/>
+      <path d="M42 24 C54 4, 75 14, 95 4 C112 -4, 125 14, 145 4 C160 -3, 175 12, 195 4
+        C210 12, 225 0, 242 8 C255 14, 268 4, 278 24Z"
+        fill="#fff2ef" opacity="0.45" stroke="#f4c2c2" stroke-width="0.3"/>
+      <!-- Ribbon band -->
+      <rect x="110" y="8" width="100" height="26" rx="5" fill="url(#rg)" opacity="0.65"/>
+      <rect x="110" y="8" width="100" height="13" rx="5" fill="white" opacity="0.08"/>
+      <!-- Bow -->
+      <path d="M160 8 C145 -8, 108 -14, 100 -2 C92 10, 110 20, 130 15 C142 12, 152 10, 160 8Z"
+        fill="#d4a574" opacity="0.7" stroke="#c08050" stroke-width="0.5"/>
+      <path d="M160 8 C175 -8, 212 -14, 220 -2 C228 10, 210 20, 190 15 C178 12, 168 10, 160 8Z"
+        fill="#d4a574" opacity="0.7" stroke="#c08050" stroke-width="0.5"/>
+      <ellipse cx="160" cy="8" rx="9" ry="7" fill="#c9956a"/>
+      <ellipse cx="159" cy="7" rx="4" ry="3" fill="#d4a574" opacity="0.5"/>
+      <!-- Tails -->
+      <path d="M152 34 C145 52, 122 65, 112 74" stroke="#c9956a" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.55"/>
+      <path d="M168 34 C175 52, 198 65, 208 74" stroke="#c9956a" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.55"/>
+      <!-- Bottom shadow -->
+      <path d="M28 234 C100 240, 220 240, 292 234" stroke="#d09090" stroke-width="0.8" fill="none" opacity="0.22"/>
     </svg>
   </div>`;
   bouquetScene.appendChild(wrap);
-  
+
+  // --- Layer 3: Leaves ---
   bouquetLeaves.forEach(l => {
     const el = document.createElement('div');
     el.className = 'bouquet-leaf';
-    el.style.cssText = `left:${l.x}px; top:${l.y + 140}px; --rot:${l.rot}deg; --delay:${l.delay}s;`;
-    el.innerHTML = `<svg width="${l.w}" height="${l.h}" viewBox="0 0 50 25" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="25" cy="12" rx="24" ry="11" fill="#5a9a4a" opacity="0.7"/>
-      <line x1="2" y1="12" x2="48" y2="12" stroke="#4a7a3a" stroke-width="1" opacity="0.5"/>
+    el.style.cssText = `left:${l.x}px; top:${l.y}px; --rot:${l.rot}deg; --delay:${l.delay}s; z-index:3;`;
+    el.innerHTML = `<svg width="${l.w}" height="${l.h}" viewBox="0 0 55 28" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 14 C8 4, 25 0, 53 14 C25 28, 8 24, 2 14Z" fill="#4a7a3a" opacity="0.7"/>
+      <path d="M2 14 C15 10, 35 9, 53 14" stroke="#3d6b2e" stroke-width="0.8" fill="none" opacity="0.6"/>
     </svg>`;
     bouquetScene.appendChild(el);
   });
 
+  // --- Layer 4: Flower heads (z-index 5) ---
   bouquetFlowers.forEach(f => {
     const el = document.createElement('div');
     el.className = 'bouquet-flower';
-    el.style.cssText = `left:${f.x}px; top:${f.y + 140}px; --rot:${f.rot}deg; --delay:${f.delay}s;`;
+    el.style.cssText = `left:${f.x}px; top:${f.y}px; --rot:0deg; --delay:${f.delay}s; z-index:5;`;
     let html = '';
     if (f.type === 'rose') html = svgRose(f.size, f.color, f.inner);
     else if (f.type === 'tulip') html = svgTulip(f.size, f.color, f.dark);
@@ -1271,18 +1774,18 @@ function buildBouquet() {
     else if (f.type === 'bud') html = svgSmallBud(f.size, f.color);
     el.innerHTML = html;
     bouquetScene.appendChild(el);
-    setTimeout(() => {
-      el.classList.add('bloomed');
-    }, (f.delay + 1) * 1000);
+    setTimeout(() => el.classList.add('bloomed'), (f.delay + 1) * 1000);
   });
 
+  // --- Layer 5: Sparkles ---
   sparklePositions.forEach(s => {
     const el = document.createElement('div');
     el.className = 'bouquet-sparkle';
-    el.style.cssText = `left:${s.x}px; top:${s.y + 140}px; --delay:${s.delay}s;`;
+    el.style.cssText = `left:${s.x}px; top:${s.y}px; --delay:${s.delay}s; z-index:6;`;
     bouquetScene.appendChild(el);
   });
 }
+
 
 function openBouquet(e) {
   e.stopPropagation();
@@ -1300,15 +1803,71 @@ function closeBouquet(e) {
 flowerPolaroid.addEventListener('click', openBouquet);
 bouquetClose.addEventListener('click', closeBouquet);
 bouquetBackdrop.addEventListener('click', closeBouquet);
+
+// Close with Escape key
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && bouquetOverlay.classList.contains('active')) {
     closeBouquet(e);
   }
 });
 
+// ============ VINYL PLAYER ============
+const vinylPlayer = document.getElementById('vinylPlayer');
+const vinylRecord = document.getElementById('vinylRecord');
+const tonearm = document.getElementById('tonearm');
+const playBtn = document.getElementById('playBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+const songAudio = document.getElementById('songAudio');
+const songInfo = document.getElementById('songInfo');
+const songDedication = document.getElementById('songDedication');
+
+let isPlaying = false;
+
+playBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (isPlaying) {
+    songAudio.pause();
+    vinylRecord.classList.add('paused');
+    tonearm.classList.remove('playing');
+    playIcon.style.display = '';
+    pauseIcon.style.display = 'none';
+    isPlaying = false;
+  } else {
+    songAudio.play().then(() => {
+      vinylRecord.classList.add('spinning');
+      vinylRecord.classList.remove('paused');
+      tonearm.classList.add('playing');
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = '';
+      isPlaying = true;
+    }).catch(() => {
+
+      vinylRecord.classList.add('spinning');
+      vinylRecord.classList.remove('paused');
+      tonearm.classList.add('playing');
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = '';
+      isPlaying = true;
+    });
+  }
+});
+
+// Scroll trigger for vinyl section
+const vinylObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      vinylPlayer.classList.add('visible');
+      songInfo.classList.add('visible');
+      songDedication.classList.add('visible');
+    }
+  });
+}, { threshold: 0.3 });
+
+vinylObserver.observe(vinylPlayer);
+
 setInterval(() => { for (let i = 0; i < 2; i++) createPetal(); }, 3000);
 </script>
 
-  
 </body>
 </html>

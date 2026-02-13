@@ -37,7 +37,7 @@
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ctext y='15' font-size='14'%3E♡%3C/text%3E%3C/svg%3E"), auto;
   }
 
-  /* ============ HERO SECTION ============ */
+
   .hero {
     min-height: 100vh;
     display: flex;
@@ -573,7 +573,6 @@
     filter: drop-shadow(0 4px 20px rgba(201,114,114,0.35));
   }
 
-  /* ============ PETAL RAIN ============ */
   .petal {
     position: fixed;
     pointer-events: none;
@@ -589,7 +588,6 @@
     100% { opacity: 0; transform: translateY(100vh) rotate(720deg) translateX(80px); }
   }
 
-  /* ============ CLICK HEARTS ============ */
   .click-heart {
     position: fixed;
     pointer-events: none;
@@ -604,7 +602,6 @@
     100% { opacity: 0; transform: scale(0.8) translateY(-50px); }
   }
 
-  /* ============ RESPONSIVE ============ */
   @media (max-width: 600px) {
     .envelope { padding: 2rem 1.5rem; }
     .polaroid-img { width: 150px; height: 150px; }
@@ -614,15 +611,15 @@
 </head>
 <body>
 
-<!-- Floating hearts background -->
+
 <div class="floating-hearts" id="floatingHearts"></div>
 
-<!-- ====== HERO ====== -->
+
 <section class="hero">
   <div class="hero-content">
-    <p class="hero-top-text">a little something for you</p>
-    <h1 class="hero-title">Happy <em>Valentine's</em><br>Day</h1>
-    <p class="hero-subtitle">to the one who makes every day brighter</p>
+    <p class="hero-top-text">My Dear Sayastha</p>
+    <h1 class="hero-title">Happy <em>Valentine's</em><br>Day!!!</h1>
+    <p class="hero-subtitle">you make every day brighter, I can't wait for a lifetime with you my loveee</p>
     <div class="hero-heart">
       <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     </div>
@@ -633,22 +630,20 @@
   </div>
 </section>
 
-<!-- ====== LOVE LETTER ====== -->
 <section class="letter-section">
   <div class="envelope-container">
     <div class="envelope" id="envelope">
       <div class="wax-seal"><span>♡</span></div>
       <div class="letter-date">February 14, 2026</div>
-      <div class="letter-greeting">My dearest,</div>
+      <div class="letter-greeting">Dearest Sayastha,</div>
       <div class="letter-body" id="letterBody"></div>
       <div class="letter-closing" id="letterClosing">
-        Forever yours ♡
+        Forever your husband, Matthew ♡
       </div>
     </div>
   </div>
 </section>
 
-<!-- ====== REASONS I LOVE YOU ====== -->
 <section class="reasons-section">
   <p class="section-label">a few of many</p>
   <h2 class="section-title">Reasons I Love You</h2>
@@ -680,10 +675,9 @@
   </div>
 </section>
 
-<!-- ====== PHOTO MEMORIES ====== -->
+
 <section class="gallery-section">
-  <p class="section-label">moments with you</p>
-  <h2 class="section-title">Our Little Gallery</h2>
+  <h2 class="section-title">Our Gallery</h2>
   <div class="polaroid-grid" id="polaroidGrid">
     <div class="polaroid" style="--rotate: -3deg;">
       <div class="polaroid-img">🥰</div>
@@ -697,15 +691,22 @@
       <div class="polaroid-img">🎂</div>
       <div class="polaroid-caption">your birthday surprise</div>
     </div>
-    <div class="polaroid" style="--rotate: 3deg;">
+    <div class="polaroid" id="flowerPolaroid" style="--rotate: 3deg;">
       <div class="polaroid-img">💐</div>
       <div class="polaroid-caption">just because flowers</div>
     </div>
   </div>
-  <p style="margin-top: 2rem; font-size: 0.85rem; color: var(--text-light); font-style: italic;">
-    tip: replace the emojis with real photos of you two!
-  </p>
 </section>
+
+  <div class="bouquet-overlay" id="bouquetOverlay">
+  <div class="bouquet-backdrop" id="bouquetBackdrop"></div>
+  <div class="bouquet-card">
+    <button class="bouquet-close" id="bouquetClose">✕</button>
+    <div class="bouquet-scene" id="bouquetScene"></div>
+    <div class="bouquet-title">a bouquet, just for you 🌹</div>
+    <div class="bouquet-subtitle">because you deserve flowers every day</div>
+  </div>
+</div>
 
 <!-- ====== FINAL ====== -->
 <section class="final-section">
@@ -743,13 +744,11 @@ function createFloatingHeart() {
   setTimeout(() => heart.remove(), (duration + delay) * 1000);
 }
 
-// Create hearts periodically
+
 setInterval(createFloatingHeart, 1800);
 for (let i = 0; i < 6; i++) createFloatingHeart();
 
-// ============ TYPEWRITER EFFECT ============
-const letterText = "Every day with you feels like the most beautiful gift. You have this incredible way of turning ordinary moments into memories I'll hold onto forever. I don't know how you do it, but you make everything — every laugh, every quiet moment, every little adventure — feel like magic. Thank you for being you, for choosing me, and for making my world so much more wonderful just by being in it.";
-
+const letterText = "Every day with you feels like the most beautiful gift. Everyday I wake up with slivers of you from my dreams trapped in my eyes, like they're holding onto the last glimpses of a heavenly vision before I fully wake up. I don't know how you do it, but you make everything — every laugh, every quiet moment, every little adventure — feel like magic. Thank you for being you, for choosing me, and for making my world so much more wonderful just by being in it! I am constantly reminded of how lucky I am by your precious beauty and every laugh we share drowns out the sounds of everything else. Don't forget I'll never leave your side and I am always here for you i promise nothing can ever keep me from loving you. I can't wait for you to be back, I'm gonna hold u sooo tight my love. I LOVE YOU FOREVERRRR!! Happy valentine's baby <3";
 let letterIndex = 0;
 let letterStarted = false;
 
@@ -767,12 +766,9 @@ function typeLetter() {
     document.getElementById('letterClosing').classList.add('visible');
   }
 }
-
-// ============ SCROLL ANIMATIONS ============
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      // Reason cards
       if (entry.target.classList.contains('reason-card')) {
         const cards = [...document.querySelectorAll('.reason-card')];
         const idx = cards.indexOf(entry.target);
@@ -789,7 +785,6 @@ const observer = new IntersectionObserver((entries) => {
         letterStarted = true;
         setTimeout(typeLetter, 600);
       }
-      // Final section
       if (entry.target.id === 'finalText') {
         entry.target.classList.add('visible');
         document.getElementById('finalSub').classList.add('visible');
@@ -804,7 +799,6 @@ document.querySelectorAll('.polaroid').forEach(el => observer.observe(el));
 observer.observe(document.getElementById('envelope'));
 observer.observe(document.getElementById('finalText'));
 
-// ============ CARD GLOW FOLLOW ============
 document.querySelectorAll('.reason-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
@@ -813,7 +807,6 @@ document.querySelectorAll('.reason-card').forEach(card => {
   });
 });
 
-// ============ CLICK HEARTS ============
 document.addEventListener('click', e => {
   const hearts = ['♡', '❤', '💕', '💗', '✿', '♥'];
   const heart = document.createElement('div');
@@ -825,7 +818,6 @@ document.addEventListener('click', e => {
   setTimeout(() => heart.remove(), 800);
 });
 
-// ============ PETAL RAIN (occasional) ============
 function createPetal() {
   const petal = document.createElement('div');
   petal.classList.add('petal');
@@ -846,8 +838,217 @@ function createPetal() {
   setTimeout(() => petal.remove(), 9000);
 }
 
+const bouquetOverlay = document.getElementById('bouquetOverlay');
+const bouquetScene = document.getElementById('bouquetScene');
+const bouquetClose = document.getElementById('bouquetClose');
+const bouquetBackdrop = document.getElementById('bouquetBackdrop');
+const flowerPolaroid = document.getElementById('flowerPolaroid');
+
+function svgRose(size, color, innerColor) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="50" rx="38" ry="36" fill="${color}" opacity="0.5"/>
+    <ellipse cx="50" cy="42" rx="30" ry="28" fill="${color}" opacity="0.7"/>
+    <path d="M50 20 C30 20, 18 35, 22 50 C26 65, 40 68, 50 60 C60 68, 74 65, 78 50 C82 35, 70 20, 50 20Z" fill="${color}"/>
+    <path d="M50 28 C38 28, 28 38, 32 48 C36 58, 44 58, 50 52 C56 58, 64 58, 68 48 C72 38, 62 28, 50 28Z" fill="${innerColor}"/>
+    <path d="M50 35 C42 35, 36 42, 40 48 C44 54, 50 50, 50 50 C50 50, 56 54, 60 48 C64 42, 58 35, 50 35Z" fill="${color}" opacity="0.9"/>
+    <circle cx="50" cy="44" r="6" fill="${innerColor}" opacity="0.8"/>
+    <circle cx="50" cy="44" r="3" fill="${color}" opacity="0.6"/>
+  </svg>`;
+}
+
+function svgTulip(size, color, darkColor) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+    <line x1="40" y1="65" x2="40" y2="115" stroke="#4a7a3a" stroke-width="3" stroke-linecap="round"/>
+    <path d="M38 85 C30 80, 15 75, 12 82 C9 89, 22 88, 30 86" fill="#5a9a4a" opacity="0.7"/>
+    <path d="M40 15 C25 15, 12 30, 15 50 C18 65, 30 68, 40 65 C50 68, 62 65, 65 50 C68 30, 55 15, 40 15Z" fill="${color}"/>
+    <path d="M40 15 C35 15, 22 28, 25 48 C27 58, 34 62, 40 60Z" fill="${darkColor}" opacity="0.5"/>
+    <path d="M40 15 C45 15, 58 28, 55 48 C53 58, 46 62, 40 60Z" fill="white" opacity="0.12"/>
+    <ellipse cx="40" cy="18" rx="8" ry="4" fill="${darkColor}" opacity="0.3"/>
+  </svg>`;
+}
+
+function svgBlossom(size, color, centerColor) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(50,50)">
+      ${[0, 72, 144, 216, 288].map(angle => `
+        <ellipse cx="0" cy="-20" rx="14" ry="22" fill="${color}" transform="rotate(${angle})" opacity="0.85"/>
+      `).join('')}
+      ${[36, 108, 180, 252, 324].map(angle => `
+        <ellipse cx="0" cy="-16" rx="10" ry="18" fill="${color}" transform="rotate(${angle})" opacity="0.5"/>
+      `).join('')}
+      <circle cx="0" cy="0" r="8" fill="${centerColor}"/>
+      <circle cx="-2" cy="-2" r="2" fill="white" opacity="0.5"/>
+      <circle cx="2" cy="1" r="1.5" fill="white" opacity="0.3"/>
+    </g>
+  </svg>`;
+}
+
+function svgSmallBud(size, color) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 50 70" xmlns="http://www.w3.org/2000/svg">
+    <line x1="25" y1="35" x2="25" y2="65" stroke="#5a9a4a" stroke-width="2" stroke-linecap="round"/>
+    <ellipse cx="25" cy="22" rx="12" ry="18" fill="${color}" opacity="0.8"/>
+    <ellipse cx="25" cy="18" rx="8" ry="12" fill="${color}"/>
+    <ellipse cx="25" cy="15" rx="4" ry="6" fill="white" opacity="0.15"/>
+  </svg>`;
+}
+
+const bouquetFlowers = [
+  { type:'rose', x:170, y:80, size:80, color:'#c0392b', inner:'#e74c3c', rot:-5, delay:0.6 },
+  { type:'rose', x:230, y:65, size:90, color:'#a93226', inner:'#d63031', rot:3, delay:0.7 },
+  { type:'rose', x:190, y:130, size:75, color:'#e74c3c', inner:'#f1948a', rot:-8, delay:0.9 },
+
+  { type:'rose', x:110, y:110, size:65, color:'#cb4335', inner:'#ec7063', rot:-15, delay:1.0 },
+  { type:'rose', x:280, y:100, size:70, color:'#b03a2e', inner:'#d98880', rot:12, delay:1.05 },
+  { type:'rose', x:140, y:50, size:55, color:'#d4453a', inner:'#f1948a', rot:-10, delay:1.1 },
+  { type:'rose', x:270, y:45, size:58, color:'#c0392b', inner:'#e74c3c', rot:8, delay:1.15 },
+
+  { type:'tulip', x:80, y:50, size:65, color:'#e84393', dark:'#c2185b', rot:-20, delay:1.2 },
+  { type:'tulip', x:310, y:55, size:60, color:'#fd79a8', dark:'#e84393', rot:18, delay:1.25 },
+  { type:'tulip', x:130, y:20, size:55, color:'#ff6b6b', dark:'#c0392b', rot:-12, delay:1.3 },
+  { type:'tulip', x:260, y:15, size:55, color:'#e84393', dark:'#ad1457', rot:10, delay:1.35 },
+  { type:'tulip', x:200, y:10, size:50, color:'#ff7979', dark:'#c0392b', rot:0, delay:1.4 },
+
+  { type:'blossom', x:90, y:15, size:48, color:'#fce4ec', center:'#f8bbd0', rot:-8, delay:1.45 },
+  { type:'blossom', x:310, y:10, size:45, color:'#f8bbd0', center:'#f48fb1', rot:5, delay:1.5 },
+  { type:'blossom', x:60, y:75, size:42, color:'#fce4ec', center:'#e8a0a0', rot:-22, delay:1.55 },
+  { type:'blossom', x:340, y:80, size:40, color:'#f8bbd0', center:'#f48fb1', rot:20, delay:1.6 },
+  { type:'blossom', x:165, y:-5, size:38, color:'#fce4ec', center:'#f8bbd0', rot:-3, delay:1.65 },
+  { type:'blossom', x:245, y:-10, size:40, color:'#fff0f3', center:'#f4c2c2', rot:6, delay:1.7 },
+
+  { type:'bud', x:55, y:40, size:35, color:'#c0392b', rot:-25, delay:1.3 },
+  { type:'bud', x:345, y:45, size:32, color:'#e84393', rot:22, delay:1.35 },
+  { type:'bud', x:105, y:-10, size:30, color:'#ff6b6b', rot:-15, delay:1.4 },
+  { type:'bud', x:295, y:-15, size:28, color:'#fd79a8', rot:12, delay:1.45 },
+];
+
+const bouquetLeaves = [
+  { x:100, y:165, w:50, h:25, rot:-40, delay:0.5 },
+  { x:280, y:160, w:50, h:25, rot:35, delay:0.55 },
+  { x:70, y:130, w:45, h:22, rot:-55, delay:0.6 },
+  { x:310, y:125, w:45, h:22, rot:50, delay:0.65 },
+  { x:140, y:185, w:40, h:20, rot:-25, delay:0.7 },
+  { x:250, y:180, w:40, h:20, rot:20, delay:0.75 },
+  { x:55, y:100, w:35, h:18, rot:-65, delay:0.8 },
+  { x:340, y:95, w:35, h:18, rot:60, delay:0.85 },
+];
+
+const sparklePositions = [
+  { x:120, y:30, delay:2.5 }, { x:280, y:25, delay:2.8 },
+  { x:80, y:90, delay:3.0 }, { x:330, y:70, delay:2.7 },
+  { x:200, y:5, delay:3.2 }, { x:160, y:60, delay:2.9 },
+  { x:250, y:55, delay:3.1 }, { x:100, y:-5, delay:3.3 },
+  { x:300, y:0, delay:2.6 }, { x:195, y:95, delay:3.0 },
+];
+
+function randomBurstPetals() {
+  const petals = [];
+  const colors = ['#f4c2c2','#e74c3c','#f8bbd0','#fce4ec','#fd79a8','#ff6b6b','#d4a574'];
+  for (let i = 0; i < 18; i++) {
+    const angle = (Math.PI * 2 / 18) * i + (Math.random() - 0.5) * 0.5;
+    const dist = 100 + Math.random() * 160;
+    petals.push({
+      tx: Math.cos(angle) * dist,
+      ty: Math.sin(angle) * dist - 40,
+      tr: (Math.random() - 0.5) * 720,
+      size: 8 + Math.random() * 10,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      delay: 0.3 + Math.random() * 0.5,
+    });
+  }
+  return petals;
+}
+
+function buildBouquet() {
+  bouquetScene.innerHTML = '';
+
+  randomBurstPetals().forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'burst-petal';
+    el.style.cssText = `
+      left: calc(50% - ${p.size/2}px);
+      top: 45%;
+      width: ${p.size}px; height: ${p.size}px;
+      background: ${p.color};
+      --tx: ${p.tx}px; --ty: ${p.ty}px; --tr: ${p.tr}deg;
+      --delay: ${p.delay}s;
+    `;
+    bouquetScene.appendChild(el);
+  });
+
+  const wrap = document.createElement('div');
+  wrap.className = 'bouquet-wrap';
+  wrap.innerHTML = `<div class="wrap-body">
+    <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 40 L10 190 C10 196, 16 200, 22 200 L158 200 C164 200, 170 196, 170 190 L150 40Z" fill="#f7d1d1" stroke="#e8a0a0" stroke-width="1"/>
+      <path d="M30 40 L10 190 C10 196, 16 200, 22 200 L90 200 L90 40Z" fill="#f4c2c2" opacity="0.3"/>
+      <path d="M30 40 L150 40" stroke="#d4a574" stroke-width="2" fill="none"/>
+      <path d="M20 55 C50 48, 130 48, 160 55" stroke="#e8c9a0" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <rect x="70" y="28" width="40" height="18" rx="3" fill="#d4a574" opacity="0.5"/>
+      <path d="M90 28 C85 20, 70 18, 75 28 M90 28 C95 20, 110 18, 105 28" stroke="#d4a574" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>`;
+  bouquetScene.appendChild(wrap);
+  
+  bouquetLeaves.forEach(l => {
+    const el = document.createElement('div');
+    el.className = 'bouquet-leaf';
+    el.style.cssText = `left:${l.x}px; top:${l.y + 140}px; --rot:${l.rot}deg; --delay:${l.delay}s;`;
+    el.innerHTML = `<svg width="${l.w}" height="${l.h}" viewBox="0 0 50 25" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="25" cy="12" rx="24" ry="11" fill="#5a9a4a" opacity="0.7"/>
+      <line x1="2" y1="12" x2="48" y2="12" stroke="#4a7a3a" stroke-width="1" opacity="0.5"/>
+    </svg>`;
+    bouquetScene.appendChild(el);
+  });
+
+  bouquetFlowers.forEach(f => {
+    const el = document.createElement('div');
+    el.className = 'bouquet-flower';
+    el.style.cssText = `left:${f.x}px; top:${f.y + 140}px; --rot:${f.rot}deg; --delay:${f.delay}s;`;
+    let html = '';
+    if (f.type === 'rose') html = svgRose(f.size, f.color, f.inner);
+    else if (f.type === 'tulip') html = svgTulip(f.size, f.color, f.dark);
+    else if (f.type === 'blossom') html = svgBlossom(f.size, f.color, f.center);
+    else if (f.type === 'bud') html = svgSmallBud(f.size, f.color);
+    el.innerHTML = html;
+    bouquetScene.appendChild(el);
+    setTimeout(() => {
+      el.classList.add('bloomed');
+    }, (f.delay + 1) * 1000);
+  });
+
+  sparklePositions.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'bouquet-sparkle';
+    el.style.cssText = `left:${s.x}px; top:${s.y + 140}px; --delay:${s.delay}s;`;
+    bouquetScene.appendChild(el);
+  });
+}
+
+function openBouquet(e) {
+  e.stopPropagation();
+  buildBouquet();
+  bouquetOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBouquet(e) {
+  e.stopPropagation();
+  bouquetOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+flowerPolaroid.addEventListener('click', openBouquet);
+bouquetClose.addEventListener('click', closeBouquet);
+bouquetBackdrop.addEventListener('click', closeBouquet);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && bouquetOverlay.classList.contains('active')) {
+    closeBouquet(e);
+  }
+});
+
 setInterval(() => { for (let i = 0; i < 2; i++) createPetal(); }, 3000);
 </script>
 
+  
 </body>
 </html>
